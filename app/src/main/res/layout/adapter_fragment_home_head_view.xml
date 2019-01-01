@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_105"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginRight="@dimen/dp_10"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/dp_10"
+    android:elevation="@dimen/dp_3"
+    android:background="@drawable/adapter_home_item_shape">
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/masterPic"
+        android:layout_width="@dimen/dp_85"
+        android:layout_height="@dimen/dp_98" />
+    <TextView
+        android:id="@+id/commodityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#666666"
+        android:textSize="@dimen/sp_12"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/dp_10"/>
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="@dimen/dp_10"/>
+</LinearLayout>

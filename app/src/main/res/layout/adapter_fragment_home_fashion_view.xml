@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_312"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/dp_10"
+    android:elevation="@dimen/dp_3"
+    android:background="@drawable/adapter_home_item_shape">
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/masterPic"
+        android:layout_width="@dimen/dp_85"
+        android:layout_height="@dimen/dp_98"
+       />
+    <TextView
+        android:id="@+id/commodityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#666666"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_toRightOf="@id/masterPic"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_alignTop="@id/masterPic"/>
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:textSize="@dimen/sp_14"
+        android:layout_toRightOf="@id/masterPic"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_alignBottom="@id/masterPic"/>
+</RelativeLayout>

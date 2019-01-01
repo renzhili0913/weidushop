@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#FFFFFF</color> <!-- 白色 -->
+    <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="thinblue">#4186c9</color> <!-- 淡蓝色 -->
+    <color name="transparent">#00000000</color> <!-- 透明 -->
+    <color name="thingray">#dae8f5</color> <!-- 淡灰色 -->
+    <color name="thinwhite">#c6daf0</color> <!-- 浅白色 -->
+    <color name="gray">#ececec</color> <!-- 灰色 -->
+    <color name="grayblack">#999999</color> <!-- 灰黑色 -->
+    <color name="commonblack">#585858</color> <!-- 一般使用的黑色 -->
+    <color name="line_color">#d8d8d8</color> <!-- 单调的黑色 -->
+    <color name="radiocolor">#858a8e</color> <!-- 按钮颜色 -->
+    <color name="custom_gray">#656565</color> <!-- 通用灰 -->
+    <color name="list_black">#d0d0d0</color> <!-- 分隔线黑 -->
+    <color name="fontblack">#4f4f4f</color> <!-- 字体颜色 -->
+    <color name="fontgray">#5c5c5c</color> <!-- 字体灰 -->
+    <color name="graybg">#efefef</color>
+    <color name="gray_bg">#fbfbfb</color> <!-- 事件详情页信息背景 -->
+    <color name="blackgray">#E5E5E5</color> <!-- 深灰 -->
+    <color name="pure_gray">#f2f2f2</color> <!-- 纯色灰 -->
+    <color name="set_font_color">#686868</color>
+    <color name="set_title_color">#9a9a9a</color>
+    <color name="set_account_color">#57a6d8</color>
+    <color name="center_item_color">#575757</color>
+    <color name="titlebar_color">#4bc1d2</color>
+    <color name="set_line">#e4e4e4</color>
+    <color name="blue">#145fa6</color> <!-- 蓝色 -->
+    <color name="login_bg">#4cb3e8</color>
+    <color name="hintcolor">#cdcdcd</color>
+    <color name="tb_color">#f8f8f8</color>
+    <color name="center_checked_no_color">#909090</color>
+    <color name="msg_font_color">#555555</color>
+    <color name="mark_red">#ff4040</color> <!-- 红色 -->
+    <color name="gray_text">#666666</color>
+    <color name="topic_text_color">#767676</color>
+    <color name="filter_bg_color">#00FBFF</color>
+    <color name="gray_thin">#adadad</color>
+    <color name="topic_name_color">#6db3be</color>
+    <color name="topic_reply_color">#a9a9a9</color>
+    <color name="even_city_tui_color">#777678</color>
+    <color name="even_near_color">#f2f1f1</color>
+    <color name="even_near_small_color">#dfdfdf</color>
+    <color name="even_footer_color">#989696</color>
+    <color name="banner_join_press_color">#d4ecf1</color>
+    <color name="tb_text_color">#4f423a</color>
+    <color name="register_btn_color">#7ed321</color>
+    <color name="topic_reply_time_color">#9b9b9b</color>
+
+    <!-- 播的字体颜色 -->
+    <color name="bo_small_text_color">#CCCCCC</color>
+    <color name="bo_text_hint_color">#A4A4A4</color>
+    <color name="body_text_1">#ff000000</color>
+    <color name="body_text_2">#99000000</color>
+    <color name="body_text_disabled">#66000000</color>
+    <color name="body_text_1_inverse">#ffffffff</color>
+    <color name="body_text_2_inverse">#99ffffff</color>
+    <color name="accent_1">#ff29549f</color>
+    <color name="hyperlink">#ffff549f</color>
+    <color name="background_1">#ffffffff</color>
+    <color name="whats_on_separator">#4d000000</color>
+    <color name="all_track_color">#ff222222</color>
+    <color name="block_column_1">#ff0fabff</color>
+    <color name="block_column_2">#ffdf1831</color>
+    <color name="block_column_3">#ff009939</color>
+    <color name="umeng_fb_color_btn_pressed">#1495F7</color>
+    <color name="umeng_fb_color_btn_normal">#333333</color>
+    <color name="actionbar_background_start">#3A5FCD</color>
+    <color name="actionbar_background_end">#27408B</color>
+</resources>
