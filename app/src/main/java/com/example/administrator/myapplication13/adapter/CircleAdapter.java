@@ -96,7 +96,7 @@ public class CircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View v) {
                 if (click!=null) {
-                    click.onClick(list.get(i).getWhetherGreat(),i);
+                    click.onClick(list.get(i).getWhetherGreat(),i,list.get(i).getId());
                 }
             }
         });
@@ -112,17 +112,21 @@ public class CircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
      *@author Administrator
      *@time 2019/1/1 0001 18:14
      */
-    public void setWhetherGreat(int i,int position) {
-        if (i==1){
-            list.get(position).setWhetherGreat(2);
-            list.get(position).setGreatNum(list.get(position).getGreatNum()-1);
-        }else{
-            list.get(position).setWhetherGreat(1);
-            list.get(position).setGreatNum(list.get(position).getGreatNum()+1);
-        }
-       notifyDataSetChanged();
+    public void addWhetherGreat(int position) {
+        list.get(position).setWhetherGreat(1);
+        list.get(position).setGreatNum(list.get(position).getGreatNum()+1);
+        notifyDataSetChanged();
     }
-
+    /**
+     *取消点赞
+     *@author Administrator
+     *@time 2019/1/2 0002 19:32
+     */
+    public void cancleWhetherGreat(int position) {
+        list.get(position).setWhetherGreat(2);
+        list.get(position).setGreatNum(list.get(position).getGreatNum()-1);
+        notifyDataSetChanged();
+    }
     class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.image_hander)
         SimpleDraweeView imageHander;
@@ -153,6 +157,6 @@ public class CircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.click=click;
     }
     public interface Click{
-        void onClick(int i,int position);
+        void onClick(int i,int position,int circleId);
     }
 }

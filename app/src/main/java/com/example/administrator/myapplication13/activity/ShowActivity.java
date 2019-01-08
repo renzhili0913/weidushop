@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -18,6 +19,7 @@ import com.example.administrator.myapplication13.fragment.MyFragment;
 import com.example.administrator.myapplication13.fragment.OrderFragment;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
 import com.example.administrator.myapplication13.view.IView;
+import com.example.administrator.myapplication13.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ import butterknife.OnClick;
 
 public class ShowActivity extends BaseActivty {
     @BindView(R.id.viewpager)
-    ViewPager viewpager;
+    NoScrollViewPager viewpager;
     @BindView(R.id.image_background)
     ImageView imageBackground;
     @BindView(R.id.but_home)
@@ -44,6 +46,7 @@ public class ShowActivity extends BaseActivty {
     @BindView(R.id.radiogroup)
     RadioGroup radiogroup;
     private List<Fragment> list;
+    private HomeFragment homeFragment;
 
     @Override
     protected void initData() {
@@ -53,8 +56,9 @@ public class ShowActivity extends BaseActivty {
     @Override
     protected void initView(Bundle savedInstanceState) {
         ButterKnife.bind(this);
+        homeFragment = new HomeFragment();
         list=new ArrayList<>();
-        list.add(new HomeFragment());
+        list.add(homeFragment);
         list.add(new CircleFragment());
         list.add(new CartFragment());
         list.add(new OrderFragment());
@@ -71,7 +75,7 @@ public class ShowActivity extends BaseActivty {
                 return list.size();
             }
         });
-        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+       viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
@@ -133,5 +137,23 @@ public class ShowActivity extends BaseActivty {
     /**吐司的方法*/
     public void getToast(String str){
         Toast.makeText(ShowActivity.this,str,Toast.LENGTH_SHORT).show();
+    }
+
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            homeFragment.getBackData(true);
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

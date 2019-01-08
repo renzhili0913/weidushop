@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.myapplication13">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +21,12 @@
         </activity>
         <activity android:name=".activity.LoginActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.ShowActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.MyPersonalActivity"/>
+        <activity android:name=".activity.MyCircleActivity"/>
+        <activity android:name=".activity.MyTracksActivity"/>
+        <activity android:name=".activity.MyAddressActivity"  android:launchMode="singleTask"/>
+        <activity android:name=".activity.MyWalletActivity"/>
+        <activity android:name=".activity.MyNewAddressActivity"  android:launchMode="singleTask"/>
     </application>
 
 </manifest>

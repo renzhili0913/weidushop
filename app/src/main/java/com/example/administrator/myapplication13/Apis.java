@@ -22,16 +22,66 @@ public class Apis {
     /**修改收货信息*/
     public static final String PUT_URL_USER_CHANGE_RECYCLE_ADDRESS="user/verify/v1/changeReceiveAddress";
     /**查询用户钱包*/
-    public static final String GET_URL_USER_FIND_USER_WALLET="user/verify/v1/changeReceiveAddress";
+    public static final String GET_URL_USER_FIND_USER_WALLET="user/verify/v1/findUserWallet?page=%d&count=%d";
+
+
+
+
+
     /** 圈子列表*/
     //public static final String GET_URL_USER_FIND_USER_CIRCLE="circle/v1/findCircleList";
     public static final String GET_URL_USER_FIND_USER_CIRCLE="circle/v1/findCircleList?userId=%d&sessionId=%s&page=%d&count=%d";
+    /**
+     * 圈子点赞 http://172.17.8.100/small/circle/verify/v1/addCircleGreat
+     */
+    public static final String POST_URL_ADD_CIRCLE_GREAT="circle/verify/v1/addCircleGreat";
+    /**
+     * 取消点赞 http://172.17.8.100/small/circle/verify/v1/cancelCircleGreat
+     */
+    public static final String DELETE_URL_CANCLE_CIRCLE_GREAT="circle/verify/v1/cancelCircleGreat?circleId=%d";
+
+
+
 
 
     /**首页商品列表*/
     public static final String GET_URL_USER_FIND_HOME_SHOP="commodity/v1/commodityList";
     /**首页轮播图*/
     public static final String GET_URL_USER_FIND_HOME_BANNER="commodity/v1/bannerShow";
-
-
+    /**
+     * 查询一级商品类目 http://172.17.8.100/small/commodity/v1/findFirstCategory
+     */
+    public static final String GET_URL_FIND_FIRST_CATEGORY="commodity/v1/findFirstCategory";
+    /**
+     * 查询二级商品类目 http://172.17.8.100/small/commodity/v1/findSecondCategory
+     */
+    public static final String GET_URL_FIND_SECOND_CATEGORY="commodity/v1/findSecondCategory?firstCategoryId=%s";
+    /**
+     * 根据二级类目查询商品信息 http://172.17.8.100/small/commodity/v1/findCommodityByCategory
+     */
+    public static final String GET_URL_FIND_COMMODITY_BYCATEGORY="commodity/v1/findCommodityByCategory?categoryId=%s&page=%d&count=%d";
+    /**
+     * 根据关键词查询商品信息 http://172.17.8.100/small/commodity/v1/findCommodityByKeyword
+     */
+    public static final String GET_URL_FIND_COMMODITY_BYKEYWORD_SHOP="commodity/v1/findCommodityByKeyword?keyword=%s&page=%d&count=%d";
+    /**
+     * 根据商品列表归属标签查询商品信息 http://172.17.8.100/small/commodity/v1/findCommodityListByLabel
+     */
+    public static final String GET_URL_FIND_COMMODITY_LIST_BYLABEL="commodity/v1/findCommodityListByLabel?labelId=%s&page=%d&count=%d";
+    /**
+     *  商品详情 http://172.17.8.100/small/commodity/v1/findCommodityDetailsById
+     */
+    public static final String GET_URL_FIND_COMMODITY_DETAILS_BYID="commodity/v1/findCommodityDetailsById?commodityId=%d";
+    /**
+     * 我的足迹 http://172.17.8.100/small/commodity/verify/v1/browseList
+     */
+    public static final String GET_URL_BROWSE_LIST="commodity/verify/v1/browseList?page=%d&count=%d";
+    /**
+     * 同步购物车数据 http://172.17.8.100/small/order/verify/v1/syncShoppingCart
+     */
+    public static final String URL_SYNC_SHOPPING_CART_PUT="order/verify/v1/syncShoppingCart";
+    /**
+     * 查询购物车 http://172.17.8.100/small/order/verify/v1/findShoppingCart
+     */
+    public static final String URL_FIND_SHOPPING_CART_GET="order/verify/v1/findShoppingCart";
 }

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_fragment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:id="@+id/image_classification"
@@ -20,6 +25,7 @@
         android:hint="请输入您要搜索的商品"
         android:textSize="@dimen/sp_12"
         android:textColor="#ccc"
+
         android:paddingLeft="@dimen/dp_20"
         android:background="@drawable/home_edit_shape"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +44,7 @@
         app:layout_constraintBottom_toBottomOf="@id/edit_name"
         android:layout_marginRight="@dimen/dp_24" />
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_0"
         app:layout_constraintTop_toBottomOf="@id/edit_name"
@@ -56,7 +63,7 @@
                 android:layout_width="@dimen/dp_300"
                 android:layout_height="@dimen/dp_164"
                 app:isClipChildrenMode="true"
-                app:pageChangeDuration="1000"
+                app:AutoPlayTime="2000"
                 app:clipChildrenLeftRightMargin="@dimen/dp_10"
                 android:layout_gravity="center_horizontal" />
             <android.support.constraint.ConstraintLayout
@@ -196,4 +203,154 @@
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
+    <ImageView
+        android:id="@+id/products_background_image"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_30"
+        android:background="@mipmap/bg_rxxp_syf"
+        app:layout_constraintTop_toBottomOf="@id/edit_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/products_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="热销新品"
+        android:textSize="@dimen/sp_16"
+        android:textColor="#ff7f57"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/products_background_image"
+        app:layout_constraintBottom_toBottomOf="@id/products_background_image"
+        app:layout_constraintLeft_toLeftOf="@id/products_background_image"
+        app:layout_constraintRight_toRightOf="@id/products_background_image"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_two_shop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/products_background_image"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/backgroud_image"
+        android:layout_width="@dimen/dp_160"
+        android:layout_height="@dimen/dp_160"
+        android:background="@mipmap/meiyoushop"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/edit_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/dp_20"/>
+    <TextView
+        android:id="@+id/backgroud_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抱歉，没有找到商品额~"
+        android:textSize="@dimen/sp_16"
+        android:textColor="#666666"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintTop_toBottomOf="@id/backgroud_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_one_item"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_43.5"
+        android:background="@mipmap/bg_one"
+        android:layout_marginTop="@dimen/dp_20"
+        android:visibility="gone"
+        android:paddingLeft="@dimen/dp_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_name"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_two_item"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_92"
+        android:background="#545d5d5d"
+        android:paddingLeft="@dimen/dp_24"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/category_one_item"/>
+
 </android.support.constraint.ConstraintLayout>
+ <android.support.constraint.ConstraintLayout
+     android:id="@+id/shop_details_layout"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:visibility="gone"
+     android:paddingLeft="@dimen/dp_10"
+     android:paddingRight="@dimen/dp_10"
+     android:layout_marginTop="@dimen/dp_30">
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:background="@drawable/ic_action_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+     <ScrollView
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/image_back"
+         android:layout_marginTop="@dimen/dp_10">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+             <com.stx.xhb.xbanner.XBanner
+                 android:id="@+id/shop_xbanner"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/dp_150" />
+             <TextView
+                 android:id="@+id/title"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="#666666"
+                 android:textSize="@dimen/sp_14"
+                 android:layout_marginTop="@dimen/dp_10"/>
+             <TextView
+                 android:id="@+id/price"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="#f00"
+                 android:textSize="@dimen/sp_16"
+                 android:layout_marginTop="@dimen/dp_10"/>
+             <WebView
+                 android:id="@+id/webview"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="@dimen/dp_10"/>
+         </LinearLayout>
+     </ScrollView>
+     <ImageView
+         android:id="@+id/add_cart"
+         android:layout_width="@dimen/dp_48"
+         android:layout_height="@dimen/dp_24"
+         android:src="@drawable/common_btn_add_n"
+        app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         android:layout_marginBottom="@dimen/dp_80"
+         android:background="@drawable/add_cart_shape"/>
+     <ImageView
+         android:id="@+id/buy_shop"
+         android:layout_width="@dimen/dp_48"
+         android:layout_height="@dimen/dp_24"
+         android:src="@drawable/common_btn_buy_n"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         android:layout_marginBottom="@dimen/dp_40"
+         android:background="@drawable/add_cart_shape"/>
+ </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

@@ -1,21 +1,17 @@
 package com.example.administrator.myapplication13.fragment;
 
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.administrator.myapplication13.Apis;
 import com.example.administrator.myapplication13.R;
-import com.example.administrator.myapplication13.activity.LoginActivity;
 import com.example.administrator.myapplication13.adapter.CircleAdapter;
+import com.example.administrator.myapplication13.bean.AddFabulousBean;
+import com.example.administrator.myapplication13.bean.CancleFabulousBean;
 import com.example.administrator.myapplication13.bean.CircleBean;
 import com.example.administrator.myapplication13.bean.LoginBean;
-import com.example.administrator.myapplication13.bean.RegisterBean;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
 import com.example.administrator.myapplication13.view.IView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -79,11 +75,20 @@ public class CircleFragment extends BaseFragment implements IView {
                 initData();
             }
         });
-        //点赞
+        //点赞与取消点赞
         circleAdapter.setOnClickListener(new CircleAdapter.Click() {
             @Override
-            public void onClick(int i,int position) {
-                circleAdapter.setWhetherGreat(i,position);
+            public void onClick(int i,int position,int circleId) {
+                    if (i==1){
+                        iPresenter.deleteRequeryData(String.format(Apis.DELETE_URL_CANCLE_CIRCLE_GREAT,circleId),CancleFabulousBean.class);
+                        circleAdapter.cancleWhetherGreat(position);
+                    }else if (i==2){
+                        Map<String,String> params = new HashMap<>();
+                        params.put("circleId",String.valueOf(circleId));
+                        iPresenter.getRequeryData(Apis.POST_URL_ADD_CIRCLE_GREAT,params,AddFabulousBean.class);
+                        circleAdapter.addWhetherGreat(position);
+                    }
+
             }
         });
     }
@@ -107,6 +112,7 @@ public class CircleFragment extends BaseFragment implements IView {
         if (unbinder!=null) {
             unbinder.unbind();
         }
+        iPresenter.onDetach();
         EventBus.getDefault().unregister(this);
         EventBus.getDefault().removeStickyEvent(LoginBean.ResultBean.class);
     }
@@ -128,6 +134,15 @@ public class CircleFragment extends BaseFragment implements IView {
                xrecyclervier.refreshComplete();
             }
 
+        }else if(o instanceof AddFabulousBean){
+            AddFabulousBean addFabulousBean = (AddFabulousBean) o;
+            getToast(addFabulousBean.getMessage());
+        }else if (o instanceof CancleFabulousBean){
+            CancleFabulousBean cancleFabulousBean = (CancleFabulousBean) o;
+            getToast(cancleFabulousBean.getMessage());
+        }else if (o instanceof String){
+            String s = (String) o;
+            getToast(s);
         }
     }
     /**

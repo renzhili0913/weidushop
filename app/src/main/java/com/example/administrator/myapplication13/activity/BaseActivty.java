@@ -8,6 +8,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import okhttp3.MediaType;
+
 public abstract class BaseActivty extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public abstract class BaseActivty extends AppCompatActivity {
                     Manifest.permission.READ_PHONE_STATE,
                     //网络权限
                     Manifest.permission.INTERNET,
+                    //打开相机
+                    Manifest.permission.CAMERA,
+
             };
             ActivityCompat.requestPermissions(this,mStatenetwork,100);
         }

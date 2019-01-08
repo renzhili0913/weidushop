@@ -49,8 +49,8 @@ public class MainActivity extends BaseActivty implements IView {
     private IPresenterImpl iPresenter;
     private String name;
     private String pass;
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences preferences,preferences1;
+    private SharedPreferences.Editor editor,editor1;
     @Override
     protected void initData() {
 
@@ -66,6 +66,9 @@ public class MainActivity extends BaseActivty implements IView {
         //创建SharedPreferences
         preferences = getSharedPreferences("text",MODE_PRIVATE);
         editor=preferences.edit();
+        //创建一个SharedPreferences存放登录成功后的userid和sessionId
+        preferences1 = getSharedPreferences("UserID",MODE_PRIVATE);
+        editor1=preferences1.edit();
         //密码显示与隐藏
        imageEye.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -110,6 +113,7 @@ public class MainActivity extends BaseActivty implements IView {
                     editor.clear();
                     editor.commit();
                 }
+                editor1.putString("userId",String.valueOf(loginBean.getResult().getUserId())).putString("sessionId",loginBean.getResult().getSessionId()).commit();
                 inEventBus(loginBean);
                 getIntents();
             }

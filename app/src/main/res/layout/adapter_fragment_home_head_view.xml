@@ -3,6 +3,7 @@
     android:layout_width="@dimen/dp_105"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/layout_item"
     android:layout_marginRight="@dimen/dp_10"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"

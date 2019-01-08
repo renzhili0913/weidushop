@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_marginTop="@dimen/dp_10"
     android:layout_marginRight="@dimen/dp_10"
+    android:id="@+id/layout_item"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/dp_10"

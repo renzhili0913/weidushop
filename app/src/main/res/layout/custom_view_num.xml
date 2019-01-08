@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/shopcar_cut"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
+        android:textColor="#666"
+        android:text="－"
+        android:textSize="@dimen/sp_12"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/shopcar_num"
+        android:layout_width="@dimen/dp_31"
+        android:layout_height="@dimen/dp_18"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#666"
+        android:gravity="center"
+        android:background="#dddd"
+        />
+    <TextView
+        android:id="@+id/shopcar_add"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:text="＋"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#666"
+        />
+</LinearLayout>

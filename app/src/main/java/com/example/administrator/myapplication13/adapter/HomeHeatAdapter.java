@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -53,6 +54,14 @@ public class HomeHeatAdapter extends RecyclerView.Adapter<HomeHeatAdapter.ViewHo
         //Glide.with(context).load(list.get(i).getMasterPic()).into(viewHolder.masterPic);
         viewHolder.commodityName.setText(list.get(i).getCommodityName());
         viewHolder.price.setText("¥"+list.get(i).getPrice());
+        viewHolder.layout_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (click!=null){
+                    click.onClick(list.get(i).getCommodityId());
+                }
+            }
+        });
     }
 
     @Override
@@ -67,9 +76,20 @@ public class HomeHeatAdapter extends RecyclerView.Adapter<HomeHeatAdapter.ViewHo
         TextView commodityName;
         @BindView(R.id.price)
         TextView price;
+        @BindView(R.id.layout_item)
+        LinearLayout layout_item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+    Click click;
+
+    public void setOnClickListener(Click click) {
+        this.click = click;
+    }
+
+    public interface Click {
+        void onClick(int commodityId);
     }
 }

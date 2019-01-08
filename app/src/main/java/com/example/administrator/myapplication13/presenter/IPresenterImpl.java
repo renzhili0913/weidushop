@@ -37,6 +37,26 @@ public class IPresenterImpl implements IPresenter {
         });
     }
 
+    @Override
+    public void deleteRequeryData(String url, Class clazz) {
+        iModel.deleteRequeryData(url, clazz, new MyCallBack() {
+            @Override
+            public void setData(Object o) {
+                iView.showRequeryData(o);
+            }
+        });
+    }
+
+    @Override
+    public void putRequeryData(String url, Map<String, String> params, Class clazz) {
+        iModel.putRequeryData(url, params, clazz, new MyCallBack() {
+            @Override
+            public void setData(Object o) {
+                iView.showRequeryData(o);
+            }
+        });
+    }
+
     public void onDetach(){
         if (iModel!=null){
          iModel=null;
