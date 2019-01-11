@@ -9,7 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication13.R;
+import com.example.administrator.myapplication13.activity.EstablishOrderActivity;
+import com.example.administrator.myapplication13.adapter.AllOrderChildAdapter;
 import com.example.administrator.myapplication13.adapter.CartAdapter;
+import com.example.administrator.myapplication13.adapter.EstablistOrderAdapter;
 import com.example.administrator.myapplication13.bean.CartBean;
 
 import java.util.List;
@@ -21,9 +24,10 @@ public class CustomViewNum extends LinearLayout {
     private TextView cut;
     private TextView num;
     private int nums;
-    private CartAdapter cartAdapter;
     private List<CartBean.ResultBean> list;
     private int position;
+    private CartAdapter cartAdapter;
+    private EstablistOrderAdapter estabAdapter;
 
     public CustomViewNum(Context context) {
         super(context);
@@ -54,7 +58,12 @@ public class CustomViewNum extends LinearLayout {
                 if (callBackListener!=null) {
                     callBackListener.callback();
                 }
-                cartAdapter.notifyItemChanged(position);
+                if (cartAdapter!=null&&estabAdapter==null){
+                    cartAdapter.notifyItemChanged(position);
+                }else if(cartAdapter==null&&estabAdapter!=null){
+                    estabAdapter.notifyItemChanged(position);
+                }
+
             }
         });
         //点击减号
@@ -72,13 +81,21 @@ public class CustomViewNum extends LinearLayout {
                 if(nums==1){
                     cut.setTextColor(Color.parseColor("#999999"));
                 }
-                cartAdapter.notifyItemChanged(position);
+                if (cartAdapter!=null&&estabAdapter==null){
+                    cartAdapter.notifyItemChanged(position);
+                }else if(cartAdapter==null&&estabAdapter!=null){
+                    estabAdapter.notifyItemChanged(position);
+                }
             }
         });
     }
-    public void setData(CartAdapter cartAdapter, List<CartBean.ResultBean> list, int i){
+    public void setData(Object adapter, List<CartBean.ResultBean> list, int i){
         this.list=list;
-        this.cartAdapter=cartAdapter;
+        if (adapter instanceof CartAdapter){
+            cartAdapter = (CartAdapter) adapter;
+        }else if(adapter instanceof EstablistOrderAdapter){
+            estabAdapter = (EstablistOrderAdapter) adapter;
+        }
         position=i;
         nums=list.get(position).getCount();
         num.setText(nums+"");
@@ -86,7 +103,6 @@ public class CustomViewNum extends LinearLayout {
             cut.setTextColor(Color.parseColor("#999999"));
         }
     }
-
     private CallBackListener callBackListener;
 
     public void setOnCallBack(CallBackListener listener){

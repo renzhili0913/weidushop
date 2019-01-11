@@ -2,6 +2,8 @@ package com.example.administrator.myapplication13.fragment;
 
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
@@ -10,8 +12,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -162,6 +167,35 @@ public class HomeFragment extends BaseFragment implements IView {
         getHeatNewProductsView();
         getMagicFashionView();
         getQualityLifeView();
+        setupUI(view);
+    }
+    //隐藏软键盘
+    public void setupUI(View view) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(getActivity());
+                    return false;
+                }
+            });
+        }
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
+    }
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
     /**
      *轮播图数据
@@ -450,7 +484,7 @@ public class HomeFragment extends BaseFragment implements IView {
                 products_text.setVisibility(View.GONE);
                 products_background_image.setVisibility(View.GONE);
                 //搜索显示布局
-                showView();
+               // showView();
                 searchShopData();
                 break;
             case R.id.but_heat_new_products:
@@ -588,6 +622,8 @@ public class HomeFragment extends BaseFragment implements IView {
         if (name.equals("")){
             ((ShowActivity)getActivity()).getToast("请输入要搜索的商品");
         }else {
+            //显示布局
+            showView();
             //搜索查询商品
             iPresenter.getRequeryData(String.format(Apis.GET_URL_FIND_COMMODITY_BYKEYWORD_SHOP, name, mpage, COUNT), SearchShopBean.class);
         }
@@ -726,4 +762,6 @@ public class HomeFragment extends BaseFragment implements IView {
             products_background_image.setVisibility(View.GONE);
         }
     }
+
+
 }

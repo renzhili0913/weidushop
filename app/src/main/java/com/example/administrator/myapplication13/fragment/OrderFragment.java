@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.administrator.myapplication13.Apis;
 import com.example.administrator.myapplication13.R;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
 import com.example.administrator.myapplication13.view.IView;
@@ -38,9 +39,10 @@ public class OrderFragment extends BaseFragment  {
     NoScrollViewPager orderViewpager;
     Unbinder unbinder;
     private List<Fragment> list;
+
+
     @Override
     protected void initData() {
-
     }
 
     @Override
@@ -64,6 +66,7 @@ public class OrderFragment extends BaseFragment  {
                 return list.size();
             }
         });
+        orderViewpager.setOffscreenPageLimit(1);
 
     }
 
@@ -101,4 +104,6 @@ public class OrderFragment extends BaseFragment  {
                 break;
         }
     }
+
+
 }

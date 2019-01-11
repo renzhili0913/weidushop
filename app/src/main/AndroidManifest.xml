@@ -27,6 +27,9 @@
         <activity android:name=".activity.MyAddressActivity"  android:launchMode="singleTask"/>
         <activity android:name=".activity.MyWalletActivity"/>
         <activity android:name=".activity.MyNewAddressActivity"  android:launchMode="singleTask"/>
+        <activity android:name=".activity.EstablishOrderActivity"/>
+        <activity android:name=".activity.PaymentActivity"/>
+        <activity android:name=".activity.EvaluateActivity"/>
     </application>
 
 </manifest>

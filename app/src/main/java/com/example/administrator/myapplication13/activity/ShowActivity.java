@@ -21,6 +21,10 @@ import com.example.administrator.myapplication13.presenter.IPresenterImpl;
 import com.example.administrator.myapplication13.view.IView;
 import com.example.administrator.myapplication13.view.NoScrollViewPager;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -156,4 +160,5 @@ public class ShowActivity extends BaseActivty {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

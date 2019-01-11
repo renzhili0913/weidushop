@@ -1,6 +1,8 @@
 package com.example.administrator.myapplication13.fragment;
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,12 +13,15 @@ import android.widget.TextView;
 
 import com.example.administrator.myapplication13.Apis;
 import com.example.administrator.myapplication13.R;
+import com.example.administrator.myapplication13.activity.EstablishOrderActivity;
 import com.example.administrator.myapplication13.activity.ShowActivity;
 import com.example.administrator.myapplication13.adapter.CartAdapter;
 import com.example.administrator.myapplication13.bean.CartBean;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
 import com.example.administrator.myapplication13.view.IView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +45,7 @@ public class CartFragment extends BaseFragment implements IView {
     private IPresenterImpl iPresenter;
     private CartAdapter cartAdapter;
     private List<CartBean.ResultBean> data;
-
+    private ArrayList<CartBean.ResultBean> checkOrder;
     @Override
     protected void initData() {
         iPresenter.getRequeryData(Apis.URL_FIND_SHOPPING_CART_GET,CartBean.class);
@@ -58,14 +63,19 @@ public class CartFragment extends BaseFragment implements IView {
         cartAdapter = new CartAdapter(getActivity());
         recyclerView.setAdapter(cartAdapter);
         cartAdapter.setListener(new CartAdapter.CallBackListener() {
+
+
             @Override
             public void callBack(List<CartBean.ResultBean> list) {
                 double totalPrice = 0;
                 //勾选商品的数量，不是该商品购买的数量
                 int num = 0;
+                //创建集合存放选择的商品
+                checkOrder = new ArrayList<>();
                 for (int i =0;i<list.size();i++){
                         //取选中的状态
                         if (list.get(i).isCheck()){
+                           checkOrder.add(list.get(i));
                             totalPrice=totalPrice+(list.get(i).getCount()*list.get(i).getPrice());
                             num++;
                         }
@@ -103,7 +113,16 @@ public class CartFragment extends BaseFragment implements IView {
                 break;
             case R.id.settlement:
 
+                if (checkOrder!=null) {
+                    Intent intent = new Intent(getActivity(), EstablishOrderActivity.class);
+                    intent.putParcelableArrayListExtra("checkOrder", checkOrder);
+                    startActivity(intent);
+                }else{
+                    ((ShowActivity)getActivity()).getToast("还没有选择要购买的商品，去选择");
+                }
                 break;
+                default:
+                    break;
         }
     }
     private void checkSeller(boolean bool) {

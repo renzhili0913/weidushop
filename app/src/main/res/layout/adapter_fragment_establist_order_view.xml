@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shopcar_relative"
+        android:layout_marginBottom="@dimen/dp_10">
+        <RelativeLayout
+            android:layout_toRightOf="@+id/shopcar_radio"
+            android:layout_width="@dimen/dp_290"
+            android:layout_height="@dimen/dp_98"
+            android:elevation="@dimen/dp_4"
+            android:padding="@dimen/dp_8"
+            android:background="@drawable/adapter_home_item_shape"
+            >
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/shopcar_image"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginRight="@dimen/dp_10"
+                />
+            <TextView
+                android:id="@+id/shopcar_title"
+                android:layout_toRightOf="@+id/shopcar_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666"
+                android:textSize="@dimen/sp_12"
+                android:maxLines="2"
+                android:ellipsize="end"
+                />
+            <TextView
+                android:id="@+id/shopcar_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp_14"
+                android:textColor="#ff0606"
+                android:layout_toRightOf="@id/shopcar_image"
+                android:layout_alignBottom="@id/shopcar_image"
+                />
+            <com.example.administrator.myapplication13.view.CustomViewNum
+                android:id="@+id/shopcar_custom_view_num"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </RelativeLayout>
+

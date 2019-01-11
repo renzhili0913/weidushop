@@ -1,12 +1,16 @@
 package com.example.administrator.myapplication13.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import okhttp3.MediaType;
 
@@ -28,6 +32,28 @@ public abstract class BaseActivty extends AppCompatActivity {
         initView(savedInstanceState);
         //添加数据
         initData();
+
+       /* View showview = getWindow().peekDecorView();
+        if (showview != null) {
+            InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputmanger.hideSoftInputFromWindow(showview.getWindowToken(), 0);
+        }*/
+
+    }
+    /**
+     * 点击空白区域隐藏键盘.
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (BaseActivty.this.getCurrentFocus() != null) {
+                if (BaseActivty.this.getCurrentFocus().getWindowToken() != null) {
+                    imm.hideSoftInputFromWindow(BaseActivty.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        }
+        return super.onTouchEvent(event);
     }
 
     protected abstract void initData();

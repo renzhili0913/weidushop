@@ -1,13 +1,37 @@
 package com.example.administrator.myapplication13.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class CartBean {
+public class CartBean implements Parcelable {
 
     private String message;
     private String status;
     private List<ResultBean> result;
-    private String SUCCESS_PARAMETER="0000";
+    private final String SUCCESS_PARAMETER="0000";
+
+    protected CartBean(Parcel in) {
+        message = in.readString();
+        status = in.readString();
+        result = in.createTypedArrayList(ResultBean.CREATOR);
+
+    }
+
+    public static final Creator<CartBean> CREATOR = new Creator<CartBean>() {
+        @Override
+        public CartBean createFromParcel(Parcel in) {
+            return new CartBean(in);
+        }
+
+        @Override
+        public CartBean[] newArray(int size) {
+            return new CartBean[size];
+        }
+    };
+
     public boolean isSuccess(){
         return status.equals(SUCCESS_PARAMETER);
     }
@@ -35,7 +59,20 @@ public class CartBean {
         this.result = result;
     }
 
-    public static class ResultBean {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(message);
+        dest.writeString(status);
+        dest.writeTypedList(result);
+        dest.writeString(SUCCESS_PARAMETER);
+    }
+
+    public static class ResultBean implements Parcelable {
 
         private int commodityId;
         private String commodityName;
@@ -43,6 +80,26 @@ public class CartBean {
         private String pic;
         private double  price;
         private boolean isCheck=false;
+
+        protected ResultBean(Parcel in) {
+            commodityId = in.readInt();
+            commodityName = in.readString();
+            count = in.readInt();
+            pic = in.readString();
+            price = in.readDouble();
+        }
+
+        public static final Creator<ResultBean> CREATOR = new Creator<ResultBean>() {
+            @Override
+            public ResultBean createFromParcel(Parcel in) {
+                return new ResultBean(in);
+            }
+
+            @Override
+            public ResultBean[] newArray(int size) {
+                return new ResultBean[size];
+            }
+        };
 
         public boolean isCheck() {
             return isCheck;
@@ -90,6 +147,20 @@ public class CartBean {
 
         public void setPrice(double  price) {
             this.price = price;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(commodityId);
+            dest.writeString(commodityName);
+            dest.writeInt(count);
+            dest.writeString(pic);
+            dest.writeDouble(price);
         }
     }
 }

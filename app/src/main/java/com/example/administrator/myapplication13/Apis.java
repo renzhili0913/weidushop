@@ -84,4 +84,28 @@ public class Apis {
      * 查询购物车 http://172.17.8.100/small/order/verify/v1/findShoppingCart
      */
     public static final String URL_FIND_SHOPPING_CART_GET="order/verify/v1/findShoppingCart";
+    /**
+     * 创建订单 http://172.17.8.100/small/order/verify/v1/createOrder
+     */
+    public static final String URL_CREATE_ORDER_POST="order/verify/v1/createOrder";
+    /**
+     * 根据订单状态查询订单信息 http://172.17.8.100/small/order/verify/v1/findOrderListByStatus
+     */
+    public static final String URL_FIND_ORDER_LIST_BYSTATUS_GET="order/verify/v1/findOrderListByStatus?status=%d&page=%d&count=%d";
+    /**
+     * 删除订单 http://172.17.8.100/small/order/verify/v1/deleteOrder
+     */
+    public static final String URL_DELETE_ORDER_DELETE="order/verify/v1/deleteOrder?orderId=%s";
+    /**
+     * 收货 http://172.17.8.100/small/order/verify/v1/confirmReceipt
+     */
+    public static final String URL_CONFIRM_RECEIPT_PUT="order/verify/v1/confirmReceipt";
+    /**
+     * 支付 http://172.17.8.100/small/order/verify/v1/pay
+     */
+    public static final String URL_PAY_POST="order/verify/v1/pay";
+    /**
+     * 商品评论 http://172.17.8.100/small/commodity/verify/v1/addCommodityComment
+     */
+    public static final String URL_ADD_COMMODITY_COMMENT_LIST_POST="commodity/verify/v1/addCommodityComment";
 }

@@ -3,16 +3,20 @@ package com.example.administrator.myapplication13.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.administrator.myapplication13.MyApplication;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Request;
@@ -22,6 +26,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -153,6 +158,8 @@ public class RetrofitManager <T>{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getObserver(listener));
     }
+
+
     private Observer getObserver(final HttpListener listener){
         Observer observer = new Observer<ResponseBody>() {
             @Override
