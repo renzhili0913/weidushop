@@ -49,7 +49,7 @@ public class EvaluateActivity extends BaseActivty implements IView {
         Uri uri = Uri.parse(split[0]);
         shopcarImage.setImageURI(uri);
         shopcarTitle.setText(detailListBean.getCommodityName());
-        shopcarPrice.setText(detailListBean.getCommodityPrice()+"");
+        shopcarPrice.setText("¥"+detailListBean.getCommodityPrice());
 
     }
 
@@ -75,6 +75,7 @@ public class EvaluateActivity extends BaseActivty implements IView {
             params.put("orderId",orderId);
             params.put("content",trim);
             params.put("commodityId",String.valueOf(detailListBean.getCommodityId()));
+            //params.put("image","");
             iPresenter.getRequeryData(Apis.URL_ADD_COMMODITY_COMMENT_LIST_POST,params,CommentBean.class);
         }
 
@@ -85,6 +86,9 @@ public class EvaluateActivity extends BaseActivty implements IView {
         if (o instanceof CommentBean){
             CommentBean commentBean = (CommentBean) o;
             Toast.makeText(EvaluateActivity.this,commentBean.getMessage(),Toast.LENGTH_SHORT).show();
+        }else if (o instanceof String){
+            String s= (String) o;
+            Toast.makeText(EvaluateActivity.this,s,Toast.LENGTH_SHORT).show();
         }
     }
 }

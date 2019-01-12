@@ -167,9 +167,9 @@ public class HomeFragment extends BaseFragment implements IView {
         getHeatNewProductsView();
         getMagicFashionView();
         getQualityLifeView();
-        setupUI(view);
+        //setupUI(view);
     }
-    //隐藏软键盘
+   /* //隐藏软键盘
     public void setupUI(View view) {
 
         // Set up touch listener for non-text box views to hide keyboard.
@@ -189,7 +189,7 @@ public class HomeFragment extends BaseFragment implements IView {
                 setupUI(innerView);
             }
         }
-    }
+    }*/
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(
@@ -423,15 +423,19 @@ public class HomeFragment extends BaseFragment implements IView {
      */
     private void addShopCar(List<ShopResultBean> list) {
         String string="[";
-        for (int i=0;i<list.size();i++){
-            if(Integer.valueOf(commodityId)==list.get(i).getCommodityId()){
-                int count = list.get(i).getCount();
-                count++;
-                list.get(i).setCount(count);
-                break;
-            }else if(i==list.size()-1){
-                list.add(new ShopResultBean(Integer.valueOf(commodityId),1));
-                break;
+        if (list.size()==0){
+            list.add(new ShopResultBean(Integer.valueOf(commodityId), 1));
+        }else {
+            for (int i = 0; i < list.size(); i++) {
+                if (Integer.valueOf(commodityId) == list.get(i).getCommodityId()) {
+                    int count = list.get(i).getCount();
+                    count++;
+                    list.get(i).setCount(count);
+                    break;
+                } else if (i == list.size() - 1) {
+                    list.add(new ShopResultBean(Integer.valueOf(commodityId), 1));
+                    break;
+                }
             }
         }
         for (ShopResultBean resultBean:list){
