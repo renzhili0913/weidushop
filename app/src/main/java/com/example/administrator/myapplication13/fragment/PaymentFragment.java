@@ -70,7 +70,8 @@ public class PaymentFragment extends BaseFragment implements IView {
                 intent.putExtra("orderId",orderId);
                 intent.putExtra("payType",payType);
                 intent.putExtra("price",price);
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent,100);
             }
         });
         allRecyclerview.setPullRefreshEnabled(true);
@@ -129,5 +130,11 @@ public class PaymentFragment extends BaseFragment implements IView {
         iPresenter.onDetach();
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode==200){
+            initData();
+        }
+    }
 }

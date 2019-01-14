@@ -102,6 +102,9 @@ public class ReceivingGoodsFragment extends BaseFragment implements IView {
             }
         }else if(o instanceof ReceivingGoodsBean){
             ReceivingGoodsBean receivingGoodsBean= (ReceivingGoodsBean) o;
+            if (receivingGoodsBean!=null&&receivingGoodsBean.isSuccess()){
+                initData();
+            }
             Toast.makeText(getActivity(), receivingGoodsBean.getMessage(), Toast.LENGTH_SHORT).show();
         }else if (o instanceof String){
             String s = (String) o;

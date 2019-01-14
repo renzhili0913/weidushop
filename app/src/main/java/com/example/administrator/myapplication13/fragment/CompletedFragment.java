@@ -9,6 +9,7 @@ import com.example.administrator.myapplication13.Apis;
 import com.example.administrator.myapplication13.R;
 import com.example.administrator.myapplication13.adapter.AllOrderAdapter;
 import com.example.administrator.myapplication13.adapter.CompletedAdapter;
+import com.example.administrator.myapplication13.adapter.PaymentderAdapter;
 import com.example.administrator.myapplication13.bean.DeleteOrderBean;
 import com.example.administrator.myapplication13.bean.OrderShopBean;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
@@ -50,7 +51,14 @@ public class CompletedFragment extends BaseFragment implements IView {
         //创建适配器
         completedAdapter = new CompletedAdapter(getActivity());
         allRecyclerview.setAdapter(completedAdapter);
-
+        //取消订单
+        completedAdapter.setOnClickListener(new CompletedAdapter.DeleteClick() {
+            @Override
+            public void onClick(String id, int i) {
+                position=i;
+                iPresenter.deleteRequeryData(String.format(Apis.URL_DELETE_ORDER_DELETE,id),DeleteOrderBean.class);
+            }
+        });
         allRecyclerview.setPullRefreshEnabled(true);
         allRecyclerview.setLoadingMoreEnabled(true);
         allRecyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -87,6 +95,10 @@ public class CompletedFragment extends BaseFragment implements IView {
                 allRecyclerview.loadMoreComplete();
                 allRecyclerview.refreshComplete();
             }
+        }else if (o instanceof DeleteOrderBean) {
+            DeleteOrderBean deleteOrderBean = (DeleteOrderBean) o;
+            Toast.makeText(getActivity(), deleteOrderBean.getMessage(), Toast.LENGTH_SHORT).show();
+            completedAdapter.deleteOrder(position );
         }else if (o instanceof String){
             String s = (String) o;
             Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();

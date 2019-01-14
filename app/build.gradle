@@ -77,4 +77,7 @@ dependencies {
     //三级联动
     implementation 'liji.library.dev:citypickerview:0.7.0'
 
+    //pop
+    implementation 'com.example.zhouwei.library:library:1.0.0'
+
 }

@@ -24,7 +24,6 @@ public class AllOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private Context context;
     private List<OrderShopBean.OrderListBean> list;
-
     public AllOrderAdapter(Context context) {
         this.context = context;
         list = new ArrayList<>();

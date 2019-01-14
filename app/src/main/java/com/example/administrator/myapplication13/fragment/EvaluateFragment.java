@@ -62,6 +62,14 @@ public class EvaluateFragment extends BaseFragment implements IView {
                 startActivity(intent);
             }
         });
+        //删除
+        evaluateAdapter.setOnClickListener(new EvaluateAdapter.DeleteClick() {
+            @Override
+            public void onClick(String id, int i) {
+                position=i;
+                iPresenter.deleteRequeryData(String.format(Apis.URL_DELETE_ORDER_DELETE,id),DeleteOrderBean.class);
+            }
+        });
         allRecyclerview.setPullRefreshEnabled(true);
         allRecyclerview.setLoadingMoreEnabled(true);
         allRecyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -98,6 +106,10 @@ public class EvaluateFragment extends BaseFragment implements IView {
                 allRecyclerview.loadMoreComplete();
                 allRecyclerview.refreshComplete();
             }
+        }else if (o instanceof DeleteOrderBean) {
+            DeleteOrderBean deleteOrderBean = (DeleteOrderBean) o;
+            Toast.makeText(getActivity(), deleteOrderBean.getMessage(), Toast.LENGTH_SHORT).show();
+            evaluateAdapter.deleteOrder(position );
         }else if (o instanceof String){
             String s = (String) o;
             Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();

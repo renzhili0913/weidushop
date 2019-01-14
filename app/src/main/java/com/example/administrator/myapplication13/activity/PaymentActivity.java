@@ -111,10 +111,14 @@ public class PaymentActivity extends BaseActivty implements IView {
                 break;
             case R.id.back_page:
                 paymentSuccess.setVisibility(View.GONE);
+                Intent intent = new Intent();
+                setResult(200,intent);
                 finish();
                 break;
             case R.id.see_order:
                 paymentSuccess.setVisibility(View.GONE);
+                Intent intent1 = new Intent();
+                setResult(200,intent1);
                 finish();
                 break;
             case R.id.continue_payment:

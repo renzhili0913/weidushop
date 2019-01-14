@@ -8,13 +8,19 @@ import android.widget.Toast;
 
 import com.example.administrator.myapplication13.Apis;
 import com.example.administrator.myapplication13.R;
+import com.example.administrator.myapplication13.activity.EvaluateActivity;
 import com.example.administrator.myapplication13.activity.PaymentActivity;
 import com.example.administrator.myapplication13.adapter.AllOrderAdapter;
+import com.example.administrator.myapplication13.adapter.ListAdpater;
 import com.example.administrator.myapplication13.bean.DeleteOrderBean;
 import com.example.administrator.myapplication13.bean.OrderShopBean;
+import com.example.administrator.myapplication13.bean.ReceivingGoodsBean;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
 import com.example.administrator.myapplication13.view.IView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,8 +34,10 @@ public class AllOrderFragment extends BaseFragment implements IView {
     private static final int STATUS = 0;
     private static final int COUNT = 5;
     private int mpage;
-    private AllOrderAdapter allOrderAdapter;
+   // private AllOrderAdapter allOrderAdapter;
     private int position;
+    private ListAdpater allOrderAdapter;
+
     @Override
     protected void initData() {
         iPresenter.getRequeryData(String.format(Apis.URL_FIND_ORDER_LIST_BYSTATUS_GET, STATUS, mpage, COUNT), OrderShopBean.class);
@@ -49,24 +57,45 @@ public class AllOrderFragment extends BaseFragment implements IView {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         allRecyclerview.setLayoutManager(linearLayoutManager);
         //创建适配器
-        allOrderAdapter = new AllOrderAdapter(getActivity());
-        allRecyclerview.setAdapter(allOrderAdapter);
+        //allOrderAdapter = new AllOrderAdapter(getActivity());
+        allOrderAdapter = new ListAdpater(getActivity());
+        allRecyclerview.setAdapter(this.allOrderAdapter);
         //取消订单
-        allOrderAdapter.setOnClickListener(new AllOrderAdapter.Click() {
+        allOrderAdapter.setOnClickListener(new ListAdpater.Click() {
             @Override
-            public void onClick(String id,int i) {
+            public void onClick(String id, int i) {
                 position=i;
                 iPresenter.deleteRequeryData(String.format(Apis.URL_DELETE_ORDER_DELETE,id),DeleteOrderBean.class);
             }
         });
         //去支付
-        allOrderAdapter.setPaymentClickListener(new AllOrderAdapter.PaymentClick() {
+        allOrderAdapter.setPaymentClickListener(new ListAdpater.PaymentClick() {
             @Override
-            public void onClick(String orderId, int payType,double price) {
+            public void onClick(String orderId, int payType, double price) {
                 Intent intent = new Intent(getActivity(),PaymentActivity.class);
                 intent.putExtra("orderId",orderId);
                 intent.putExtra("payType",payType);
                 intent.putExtra("price",price);
+                //startActivity(intent);
+                startActivityForResult(intent,100);
+            }
+        });
+        //确认收货
+        allOrderAdapter.setOnClickListener(new ListAdpater.ReceivingClick() {
+            @Override
+            public void onClick(String id) {
+                Map<String,String> params = new HashMap<>();
+                params.put("orderId",id);
+                iPresenter.putRequeryData(Apis.URL_CONFIRM_RECEIPT_PUT,params,ReceivingGoodsBean.class);
+            }
+        });
+        //去评价
+        allOrderAdapter.setOnClickListener(new ListAdpater.EvaluateClick() {
+            @Override
+            public void onClick(String orderId, OrderShopBean.OrderListBean.DetailListBean detailListBean) {
+                Intent intent = new Intent(getActivity(),EvaluateActivity.class);
+                intent.putExtra("orderId",orderId);
+                intent.putExtra("detailListBean",detailListBean);
                 startActivity(intent);
             }
         });
@@ -106,6 +135,13 @@ public class AllOrderFragment extends BaseFragment implements IView {
                 allRecyclerview.loadMoreComplete();
                 allRecyclerview.refreshComplete();
             }
+        }else if(o instanceof ReceivingGoodsBean){
+            ReceivingGoodsBean receivingGoodsBean= (ReceivingGoodsBean) o;
+            if (receivingGoodsBean!=null&&receivingGoodsBean.isSuccess()){
+                initData();
+            }
+            Toast.makeText(getActivity(), receivingGoodsBean.getMessage(), Toast.LENGTH_SHORT).show();
+
         }else if (o instanceof DeleteOrderBean) {
             DeleteOrderBean deleteOrderBean = (DeleteOrderBean) o;
             Toast.makeText(getActivity(), deleteOrderBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -124,5 +160,12 @@ public class AllOrderFragment extends BaseFragment implements IView {
             unbinder.unbind();
         }
         iPresenter.onDetach();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode==200){
+            initData();
+        }
     }
 }

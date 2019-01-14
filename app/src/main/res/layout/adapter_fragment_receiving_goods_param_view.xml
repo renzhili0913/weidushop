@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="订单号"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_10"
             android:textColor="#666666"/>
         <TextView
             android:id="@+id/orderId"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="112314124214"
             android:layout_toRightOf="@id/name"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_10"
             android:textColor="#666666"
             android:layout_marginLeft="@dimen/dp_10"/>
         <TextView

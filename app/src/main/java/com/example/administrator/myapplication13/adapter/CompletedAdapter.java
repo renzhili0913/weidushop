@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication13.R;
 import com.example.administrator.myapplication13.bean.OrderShopBean;
+import com.example.zhouwei.library.CustomPopWindow;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,6 +61,33 @@ public class CompletedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(
                 new java.util.Date(list.get(i).getOrderTime()));
         myViewHolder.orderTime.setText(date);
+        //点击弹出删除按钮
+        myViewHolder.imageDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View popView=LayoutInflater.from(context).inflate(R.layout.list_oreder_pop_delete,null,false);
+                final CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(context)
+                        .setView(popView)
+                        //显示的布局，还可以通过设置一个View
+                        .setFocusable(true)
+                        //是否获取焦点，默认为ture
+                        .setOutsideTouchable(true)
+                        //是否PopupWindow 以外触摸dissmiss
+                        .create()//创建PopupWindow
+                        .showAsDropDown(v,-50,10);
+                //显示PopupWindow
+                TextView textView=popView.findViewById(R.id.text_delete);
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(deleteClick!=null){
+                            deleteClick.onClick(list.get(i).getOrderId(),i);
+                            popWindow.dissmiss();
+                        }
+                    }
+                });
+            }
+        });
        //创建套嵌的适配器展示商品
         getItewView(myViewHolder,i);
     }
@@ -76,7 +105,11 @@ public class CompletedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         return list.size();
     }
-
+    //刷新适配器
+    public void deleteOrder(int i) {
+        list.remove(i);
+        notifyDataSetChanged();
+    }
     class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.orderid)
         TextView orderid;
@@ -84,16 +117,20 @@ public class CompletedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView orderTime;
         @BindView(R.id.child_recyclerview)
         RecyclerView childRecyclerview;
+        @BindView(R.id.image_delete)
+        ImageView imageDelete;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
     }
-    Click click;
-    public void setOnClickListener(Click click){
-        this.click=click;
+    //取消订单
+     DeleteClick deleteClick;
+    public void setOnClickListener(DeleteClick deleteClick){
+        this.deleteClick=deleteClick;
     }
-    public interface Click{
+    public interface DeleteClick{
         void onClick(String id, int i);
     }
+
 }
