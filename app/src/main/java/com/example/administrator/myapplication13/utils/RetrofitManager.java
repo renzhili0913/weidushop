@@ -2,6 +2,8 @@ package com.example.administrator.myapplication13.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -198,4 +200,12 @@ public class RetrofitManager <T>{
 
         void onFail(String error);
     }
+
+    //判断是否有网络
+    public boolean hasNetWork(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+        return activeNetworkInfo!=null&&activeNetworkInfo.isAvailable();
+    }
+
 }

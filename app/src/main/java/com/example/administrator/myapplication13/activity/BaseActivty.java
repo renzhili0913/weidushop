@@ -11,6 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
+import com.example.administrator.myapplication13.utils.RetrofitManager;
 
 import okhttp3.MediaType;
 
@@ -25,6 +28,11 @@ public abstract class BaseActivty extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+        //判断是否有网络
+        boolean b = RetrofitManager.getmRetrofitManager().hasNetWork(this);
+        if (!b){
+            Toast.makeText(BaseActivty.this,"当前网络不可用",Toast.LENGTH_SHORT).show();
         }
         //动态网络权限
         stateNetWork();

@@ -103,6 +103,7 @@
                 android:text="1234567890"
                 android:textSize="@dimen/sp_12"
                 android:textColor="#999999"
+                android:password="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
             <View

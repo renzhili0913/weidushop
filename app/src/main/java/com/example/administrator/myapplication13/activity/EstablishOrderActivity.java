@@ -131,24 +131,22 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_address:
-               /* add_layout.setVisibility(View.GONE);
-                add_layout_view.setVisibility(View.VISIBLE);
-                iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);*/
                 Intent intent = new Intent(EstablishOrderActivity.this,MyNewAddressActivity.class);
                 startActivity(intent);
+                add_layout.setVisibility(View.GONE);
+                add_layout_view.setVisibility(View.VISIBLE);
                 break;
             case R.id.but_obtain:
                 if (falg){
                     address_recyclerview.setVisibility(View.VISIBLE);
                     butObtain.setBackgroundResource(R.drawable.ic_action_pull_up);
+                    iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);
                 }else {
                     address_recyclerview.setVisibility(View.GONE);
                     butObtain.setBackgroundResource(R.drawable.ic_action_drop_down);
                 }
                 falg=!falg;
 
-
-               /* iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);*/
                 break;
             case R.id.settlement:
                 //gson将选中商品集合转换成string

@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication13.R;
@@ -48,7 +47,6 @@ public class MyWalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_activity_wallet_price_item, viewGroup, false);
         return new MyPriceViewHolder(view);
     }
@@ -56,7 +54,7 @@ public class MyWalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         MyPriceViewHolder myPriceViewHolder= (MyPriceViewHolder) viewHolder;
-        myPriceViewHolder.consumptionAmount.setText(list.get(i).getAmount());
+        myPriceViewHolder.consumptionAmount.setText("¥"+list.get(i).getAmount());
         //转换为时间格式并赋值
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(
                 new java.util.Date(list.get(i).getCreateTime()));
@@ -75,8 +73,6 @@ public class MyWalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView consumptionAmount;
         @BindView(R.id.consumption_data)
         TextView consumptionData;
-        @BindView(R.id.iamge)
-        ImageView image_forward;
         public MyPriceViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
