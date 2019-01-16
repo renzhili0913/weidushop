@@ -36,6 +36,8 @@ public class EvaluateFragment extends BaseFragment implements IView {
         iPresenter.getRequeryData(String.format(Apis.URL_FIND_ORDER_LIST_BYSTATUS_GET, STATUS, mpage, COUNT), OrderShopBean.class);
     }
 
+
+
     @Override
     protected void initView(View view) {
         mpage = 1;

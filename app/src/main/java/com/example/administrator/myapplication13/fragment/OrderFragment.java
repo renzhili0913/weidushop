@@ -66,8 +66,6 @@ public class OrderFragment extends BaseFragment  {
                 return list.size();
             }
         });
-        orderViewpager.setOffscreenPageLimit(1);
-
     }
 
     @Override

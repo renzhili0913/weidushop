@@ -35,7 +35,7 @@ public class PaymentFragment extends BaseFragment implements IView {
 
     @Override
     protected void initData() {
-        iPresenter.getRequeryData(String.format(Apis.URL_FIND_ORDER_LIST_BYSTATUS_GET, STATUS, mpage, COUNT), OrderShopBean.class);
+       iPresenter.getRequeryData(String.format(Apis.URL_FIND_ORDER_LIST_BYSTATUS_GET, STATUS, mpage, COUNT), OrderShopBean.class);
     }
 
     @Override
@@ -46,6 +46,8 @@ public class PaymentFragment extends BaseFragment implements IView {
         //创建布局
         getRecyclerView();
     }
+
+
 
     private void getRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

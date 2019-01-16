@@ -39,7 +39,18 @@ public class Apis {
      * 取消点赞 http://172.17.8.100/small/circle/verify/v1/cancelCircleGreat
      */
     public static final String DELETE_URL_CANCLE_CIRCLE_GREAT="circle/verify/v1/cancelCircleGreat?circleId=%d";
-
+    /**
+     * 我的圈子 http://172.17.8.100/small/circle/verify/v1/findMyCircleById
+     */
+    public static final String URL_FIND_MYCIRCLE_BYID_GET="circle/verify/v1/findMyCircleById?page=%d&count=%d";
+    /**
+     * 删除我发表过的圈子 http://172.17.8.100/small/circle/verify/v1/deleteCircle
+     */
+    public static final String URL_DELETE_CIRCLE_DELETE="circle/verify/v1/deleteCircle?circleId=%s";
+    /**
+     * 发布圈子 http://172.17.8.100/small/circle/verify/v1/releaseCircle
+     */
+    public static final String URL_RELEASE_CIRCLE_POST="circle/verify/v1/releaseCircle";
 
 
 

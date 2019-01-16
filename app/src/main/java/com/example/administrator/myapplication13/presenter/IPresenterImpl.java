@@ -57,6 +57,16 @@ public class IPresenterImpl implements IPresenter {
         });
     }
 
+    @Override
+    public void postFileRequeryData(String url, Map<String, String> params, Class clazz) {
+        iModel.postFileRequeryData(url, params, clazz, new MyCallBack() {
+            @Override
+            public void setData(Object o) {
+                iView.showRequeryData(o);
+            }
+        });
+    }
+
     public void onDetach(){
         if (iModel!=null){
          iModel=null;

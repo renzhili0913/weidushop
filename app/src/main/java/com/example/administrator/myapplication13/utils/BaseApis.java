@@ -9,6 +9,7 @@ import java.util.Observer;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -32,5 +33,7 @@ public interface BaseApis<T> {
     Observable<ResponseBody> delete(@Url String url);
     @PUT
     Observable<ResponseBody> put(@Url String url,@QueryMap Map<String, String> map);
+    @POST
+    Observable<ResponseBody> postFile(@Url String url,@Body MultipartBody multipartBody);
 
 }

@@ -51,7 +51,7 @@ public class ReceivingGoodsChildAdapter extends RecyclerView.Adapter<ReceivingGo
         viewHolder.shopcarImage.setImageURI(uri);
         viewHolder.shopcarTitle.setText(list.get(i).getCommodityName());
         viewHolder.shopcarPrice.setText("¥"+list.get(i).getCommodityPrice());
-        viewHolder.shopcarCustomViewNum.setText(list.get(i).getCommodityCount()+"");
+        viewHolder.shopcarCustomViewNum.setText("X"+list.get(i).getCommodityCount());
     }
 
     @Override

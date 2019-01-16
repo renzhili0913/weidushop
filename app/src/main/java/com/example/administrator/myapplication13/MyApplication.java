@@ -9,6 +9,7 @@ import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
+
 public class MyApplication extends Application {
     private static Context mContext;
     @Override
@@ -35,4 +36,7 @@ public class MyApplication extends Application {
     public static Context getApplication() {
         return mContext;
     }
+
+
+
 }

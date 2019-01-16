@@ -18,6 +18,7 @@ import com.example.administrator.myapplication13.utils.RetrofitManager;
 import okhttp3.MediaType;
 
 public abstract class BaseActivty extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

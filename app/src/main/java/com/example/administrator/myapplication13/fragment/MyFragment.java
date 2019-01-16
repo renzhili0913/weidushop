@@ -8,8 +8,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.myapplication13.Apis;
+import com.example.administrator.myapplication13.MyApplication;
 import com.example.administrator.myapplication13.R;
 import com.example.administrator.myapplication13.activity.LoginActivity;
 import com.example.administrator.myapplication13.activity.MainActivity;
@@ -31,6 +34,7 @@ import com.example.administrator.myapplication13.activity.MyWalletActivity;
 import com.example.administrator.myapplication13.bean.HeadPicBean;
 import com.example.administrator.myapplication13.bean.UserDataBean;
 import com.example.administrator.myapplication13.presenter.IPresenterImpl;
+import com.example.administrator.myapplication13.utils.RetrofitManager;
 import com.example.administrator.myapplication13.view.IView;
 import com.example.administrator.myapplication13.view.PhotoPopupWindows;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -52,6 +56,7 @@ import static android.app.Activity.RESULT_OK;
 public class MyFragment extends BaseFragment implements IView {
     private static final int REQUEST_CODE =100 ;
     private static final int RESULT_NAME_CODE =200 ;
+    private final String PATH_FILE=Environment.getExternalStorageDirectory()+"/file.png";
     @BindView(R.id.my_name)
     TextView myName;
     @BindView(R.id.my_personal_data)
@@ -261,28 +266,23 @@ public class MyFragment extends BaseFragment implements IView {
             startActivityForResult(intent, 200);
         }
         if (requestCode==200&&resultCode==RESULT_OK) {
+
             Bitmap bitmap =data.getParcelableExtra("data");
+            try {
+                RetrofitManager.getmRetrofitManager().saveBitmap(bitmap,PATH_FILE,50);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i("TAG",e.getMessage());
+            }
 
             Map<String,String> params = new HashMap<>();
             //TODO  头像路径
-            params.put("image",path);
-            iPresenter.getRequeryData(Apis.POST_URL_USER_MODIFY_HEAD_PIC,params,HeadPicBean.class);
-            //myImageHander.setImageBitmap(bitmap);
+            params.put("image",PATH_FILE);
+            iPresenter.postFileRequeryData(Apis.POST_URL_USER_MODIFY_HEAD_PIC,params,HeadPicBean.class);
+
         }
     }
-   /* File file = new File(path);
-    public void saveBitmapFile(Bitmap bitmap) {
-        //将要保存图片的路径
 
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
 }

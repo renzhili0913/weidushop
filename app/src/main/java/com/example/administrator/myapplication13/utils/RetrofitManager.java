@@ -2,6 +2,7 @@ package com.example.administrator.myapplication13.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
@@ -10,6 +11,8 @@ import android.util.Log;
 import com.example.administrator.myapplication13.MyApplication;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -160,6 +163,36 @@ public class RetrofitManager <T>{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getObserver(listener));
     }
+    /**
+     *上传头像
+     *@author Administrator
+     *@time 2019/1/16 0016 11:25
+     */
+    public void postFile(String url, Map<String, String> map,HttpListener listener) {
+        if (map == null) {
+            map = new HashMap<>();
+        }
+        MultipartBody multipartBody = filesToMultipartBody(map);
+
+        baseApis.postFile(url, multipartBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(listener));
+    }
+
+    public static MultipartBody filesToMultipartBody(Map<String,String> map) {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            File file = new File(entry.getValue());
+            builder.addFormDataPart(entry.getKey(), "图片1.png",
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file));
+        }
+
+        builder.setType(MultipartBody.FORM);
+        MultipartBody multipartBody = builder.build();
+        return multipartBody;
+    }
 
 
     private Observer getObserver(final HttpListener listener){
@@ -207,5 +240,30 @@ public class RetrofitManager <T>{
         NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
         return activeNetworkInfo!=null&&activeNetworkInfo.isAvailable();
     }
+    //转换bitmap为file
+    public  void saveBitmap(Bitmap bitmap, String path, int quality) throws IOException {
+        String dir = path.substring(0, path.lastIndexOf("/"));
+        File dirFile = new File(dir);
+        if (!dirFile.exists() || !dirFile.isDirectory()) {
+            try {
+                if (!dirFile.mkdirs()) {
+                    return;
+                }
+            } catch (Exception e) {
+                Log.e("TAG", e.getMessage());
+            }
 
+        }
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(path);
+            if (bitmap.compress(Bitmap.CompressFormat.PNG, quality, out)) {
+                out.flush();
+                out.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.e("TAG", e.getMessage());
+        }
+    }
 }

@@ -27,8 +27,8 @@
             android:layout_marginLeft="@dimen/dp_10"/>
         <ImageView
             android:id="@+id/image_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_6"
             android:background="@mipmap/home_btn_moer_pink_n"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

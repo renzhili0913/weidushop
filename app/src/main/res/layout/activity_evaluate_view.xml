@@ -44,21 +44,39 @@
                 />
         </RelativeLayout>
     </RelativeLayout>
-    <EditText
-        android:id="@+id/content"
+    <RelativeLayout
+        android:id="@+id/text_lyayout"
         android:layout_width="@dimen/dp_312"
         android:layout_height="@dimen/dp_98"
-        android:hint="请在此处写下您对商品的评价"
         android:layout_below="@id/shopcar_relative"
-        android:background="@drawable/adapter_home_item_shape"/>
+        android:padding="@dimen/dp_10"
+        android:background="@drawable/adapter_home_item_shape">
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="60"
+        android:hint="请在此处写下您对商品的评价(最多60字)"
+        android:background="@null"/>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="@dimen/dp_312"
         android:layout_height="@dimen/dp_70"
         android:orientation="horizontal"
-        android:layout_below="@id/content"
+        android:layout_below="@id/text_lyayout"
         android:layout_marginTop="@dimen/dp_10">
-
+        <ImageView
+            android:id="@+id/image"
+            android:visibility="gone"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"/>
+        <ImageView
+            android:id="@+id/but_image"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:background="@mipmap/common_btn_camera_blue_n"/>
     </LinearLayout>
     <RadioButton
         android:id="@+id/synchronization_circle"
