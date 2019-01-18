@@ -2,6 +2,7 @@ package com.example.administrator.myapplication13.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -87,9 +88,9 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
         //传值到适配器
         establistOrderAdapter.setList(checkOrder);
         getAddView();
+         //查询
         iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);
-       /* //查询
-       */
+
     }
 
     @Override
@@ -132,21 +133,18 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
         switch (view.getId()) {
             case R.id.add_address:
                 Intent intent = new Intent(EstablishOrderActivity.this,MyNewAddressActivity.class);
-                startActivity(intent);
-                add_layout.setVisibility(View.GONE);
-                add_layout_view.setVisibility(View.VISIBLE);
+                startActivityForResult(intent,100);
                 break;
             case R.id.but_obtain:
                 if (falg){
                     address_recyclerview.setVisibility(View.VISIBLE);
                     butObtain.setBackgroundResource(R.drawable.ic_action_pull_up);
-                    iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);
+                    //iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);
                 }else {
                     address_recyclerview.setVisibility(View.GONE);
                     butObtain.setBackgroundResource(R.drawable.ic_action_drop_down);
                 }
                 falg=!falg;
-
                 break;
             case R.id.settlement:
                 //gson将选中商品集合转换成string
@@ -157,6 +155,9 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
                 params.put("totalPrice",String.valueOf(totalPrice));
                 params.put("addressId",String.valueOf(id));
                  iPresenter.getRequeryData(Apis.URL_CREATE_ORDER_POST,params,EstablishOrderBean.class);
+                 Intent intent1 = getIntent();
+                 setResult(200,intent1);
+                 finish();
                 break;
                 default:
                     break;
@@ -198,21 +199,24 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
                 Toast.makeText(EstablishOrderActivity.this,addressBean.getMessage(),Toast.LENGTH_SHORT).show();
             }else{
                 List<AddressBean.ResultBean> result = addressBean.getResult();
-                for (AddressBean.ResultBean resultBean:result){
-                    if (resultBean.getWhetherDefault()==1){
-                        add_layout.setVisibility(View.GONE);
-                        add_layout_view.setVisibility(View.VISIBLE);
-                        realName.setText(resultBean.getRealName());
-                        phone.setText(resultBean.getPhone());
-                        address.setText(resultBean.getAddress());
-                        id = resultBean.getId();
-                    }else{
-                        add_layout.setVisibility(View.VISIBLE);
-                        add_layout_view.setVisibility(View.GONE);
+                if (result==null) {
+                    add_layout.setVisibility(View.VISIBLE);
+                    add_layout_view.setVisibility(View.GONE);
+                }else {
+                    for (AddressBean.ResultBean resultBean : result) {
+                        if (resultBean.getWhetherDefault() == 1) {
+                            add_layout.setVisibility(View.GONE);
+                            add_layout_view.setVisibility(View.VISIBLE);
+                            realName.setText(resultBean.getRealName());
+                            phone.setText(resultBean.getPhone());
+                            address.setText(resultBean.getAddress());
+                            id = resultBean.getId();
+                            break;
+                        }
                     }
+                    //传值到适配器
+                    establistAddressAdapter.setList(result);
                 }
-                //传值到适配器
-                establistAddressAdapter.setList(result);
             }
         }else if (o instanceof EstablishOrderBean){
             EstablishOrderBean establishOrderBean = (EstablishOrderBean) o;
@@ -221,6 +225,7 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
         }else if (o instanceof String){
             String s = (String) o;
             Toast.makeText(EstablishOrderActivity.this,s,Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -228,5 +233,16 @@ public class EstablishOrderActivity extends BaseActivty implements IView {
     protected void onDestroy() {
         super.onDestroy();
         iPresenter.onDetach();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode==200){
+            add_layout.setVisibility(View.GONE);
+            add_layout_view.setVisibility(View.VISIBLE);
+            iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);
+
+        }
     }
 }

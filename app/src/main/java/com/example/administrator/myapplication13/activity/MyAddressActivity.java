@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class MyAddressActivity extends BaseActivty implements IView {
     private AddressAdapter addressAdapter;
     private static final int RESULT_COUNT = 200;
     private static final int REQUERY_COUNT = 100;
+    private int position;
     @Override
     protected void initData() {
         iPresenter.getRequeryData(Apis.GET_URL_USER_RECYCLE_ADDRESS_LIST,AddressBean.class);
@@ -59,15 +61,14 @@ public class MyAddressActivity extends BaseActivty implements IView {
         addressRecyclerview.setAdapter(addressAdapter);
         addressAdapter.setCheckedListener(new AddressAdapter.Checked() {
             @Override
-            public void ononChecked(boolean falg, int id) {
-                if (falg){
+            public void ononChecked( int id,int i) {
+                    position = i;
                     Map<String,String> params=new HashMap<>();
                     params.put("id",String.valueOf(id));
                     iPresenter.getRequeryData(Apis.POST_URL_USER_SET_DEFAULT_RECYCLE_ADDRESS_LIST,params,DefaultReceiveAddressBean.class);
                 }
-                addressAdapter.setDefaultAddress(falg);
-                initData();
-            }
+
+
         });
         //修改地址
         addressAdapter.setOnUpdataListener(new AddressAdapter.Updata() {
@@ -96,6 +97,10 @@ public class MyAddressActivity extends BaseActivty implements IView {
             }
         }else if (o instanceof DefaultReceiveAddressBean){
             DefaultReceiveAddressBean defaultReceiveAddressBean = (DefaultReceiveAddressBean) o;
+            if (defaultReceiveAddressBean!=null&&defaultReceiveAddressBean.isSuccess()){
+                addressAdapter.setAllunCheck(position);
+                Log.i("TAG","===========");
+            }
             Toast.makeText(MyAddressActivity.this,defaultReceiveAddressBean.getMessage(),Toast.LENGTH_SHORT).show();
         }else if (o instanceof String){
             String s = (String) o;

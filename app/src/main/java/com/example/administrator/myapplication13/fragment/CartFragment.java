@@ -112,13 +112,12 @@ public class CartFragment extends BaseFragment implements IView {
                 cartAdapter.notifyDataSetChanged();
                 break;
             case R.id.settlement:
-
-                if (checkOrder!=null) {
+                if (checkOrder==null||checkOrder.size()==0){
+                    ((ShowActivity)getActivity()).getToast("还没有选择要购买的商品，去选择");
+                }else{
                     Intent intent = new Intent(getActivity(), EstablishOrderActivity.class);
                     intent.putParcelableArrayListExtra("checkOrder", checkOrder);
-                    startActivity(intent);
-                }else{
-                    ((ShowActivity)getActivity()).getToast("还没有选择要购买的商品，去选择");
+                    startActivityForResult(intent,100);
                 }
                 break;
                 default:
@@ -152,6 +151,14 @@ public class CartFragment extends BaseFragment implements IView {
         }else if (o instanceof String){
             String s= (String) o;
             ((ShowActivity)getActivity()).getToast(s);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode==200){
+            initData();
         }
     }
 }

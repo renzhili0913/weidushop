@@ -57,14 +57,17 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             viewHolder.whetherDefault.setChecked(false);
         }
         //设置默认选择地址
-        viewHolder.whetherDefault.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        viewHolder.whetherDefault.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (checked!=null){
-                    checked.ononChecked(isChecked,list.get(i).getId());
+            public void onClick(View v) {
+                //设置默认值
+                if(checked!=null){
+                    checked.ononChecked(list.get(i).getId(),i);
                 }
+
             }
         });
+
         //修改地址
         viewHolder.butModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,19 +78,23 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             }
         });
     }
-
+    //改变默认值
+    public void setAllunCheck(int position) {
+        int size = list.size();
+        for (int i=0;i<size;i++){
+            if(i==position){
+                list.get(i).setWhetherDefault(1);
+            }else{
+                list.get(i).setWhetherDefault(2);
+            }
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    public void setDefaultAddress(boolean bool){
-        if (bool){
-            holder.whetherDefault.setChecked(true);
-        }else{
-            holder.whetherDefault.setChecked(false);
-        }
-    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.realName)
         TextView realName;
@@ -106,6 +113,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             ButterKnife.bind(this,itemView);
         }
     }
+    /**修改收货地址*/
     Updata updata;
     public void setOnUpdataListener(Updata updata){
         this.updata=updata;
@@ -119,6 +127,6 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         this.checked=checked;
     }
     public interface Checked{
-        void ononChecked(boolean falg,int id);
+        void ononChecked(int id,int position);
     }
 }

@@ -63,6 +63,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#666666"
                 android:textSize="@dimen/sp_14"
+                android:inputType="number"
+                android:maxLength="11"
                 android:background="@null"/>
         </LinearLayout>
         <View
@@ -145,6 +147,8 @@
                 android:layout_marginRight="@dimen/dp_20"/>
             <EditText
                 android:id="@+id/zipCode"
+                android:inputType="number"
+                android:maxLength="6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#666666"

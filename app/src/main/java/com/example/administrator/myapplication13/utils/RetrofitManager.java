@@ -241,7 +241,7 @@ public class RetrofitManager <T>{
         return activeNetworkInfo!=null&&activeNetworkInfo.isAvailable();
     }
     //转换bitmap为file
-    public  void saveBitmap(Bitmap bitmap, String path, int quality) throws IOException {
+    public void saveBitmap(Bitmap bitmap, String path, int quality) throws IOException {
         String dir = path.substring(0, path.lastIndexOf("/"));
         File dirFile = new File(dir);
         if (!dirFile.exists() || !dirFile.isDirectory()) {

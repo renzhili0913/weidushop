@@ -61,14 +61,14 @@ public class WalletBean {
 
         public static class DetailListBean {
 
-            private int amount;
+            private double amount;
             private long createTime;
 
-            public int getAmount() {
+            public double getAmount() {
                 return amount;
             }
 
-            public void setAmount(int amount) {
+            public void setAmount(double amount) {
                 this.amount = amount;
             }
 

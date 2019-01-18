@@ -89,7 +89,7 @@ public class EvaluateActivity extends BaseActivty implements IView {
                 if (trim.equals("")){
                     Toast.makeText(EvaluateActivity.this,"输入评论",Toast.LENGTH_SHORT).show();
                 }else{
-                    //TODO 评论商品请求  发表圈子
+                   /* //TODO 评论商品请求  发表圈子
                     if(synchronizationCircle.isChecked()){
                         Map<String,String> params = new HashMap<>();
                         params.put("image",PATH_FILES);
@@ -103,7 +103,7 @@ public class EvaluateActivity extends BaseActivty implements IView {
                     params.put("content",trim);
                     params.put("commodityId",String.valueOf(detailListBean.getCommodityId()));
                     params.put("image",PATH_FILES);
-                    iPresenter.postFileRequeryData(Apis.URL_ADD_COMMODITY_COMMENT_LIST_POST,params,CommentBean.class);
+                    iPresenter.postFileRequeryData(Apis.URL_ADD_COMMODITY_COMMENT_LIST_POST,params,CommentBean.class);*/
                 }
 
                 break;
