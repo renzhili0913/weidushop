@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication13.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.administrator.myapplication13.Apis;
 import com.example.administrator.myapplication13.R;
-import com.example.administrator.myapplication13.presenter.IPresenterImpl;
-import com.example.administrator.myapplication13.view.IView;
 import com.example.administrator.myapplication13.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class OrderFragment extends BaseFragment  {
+public class OrderFragment extends BaseFragment {
 
     @BindView(R.id.all_order)
     ImageView allOrder;
@@ -38,6 +37,17 @@ public class OrderFragment extends BaseFragment  {
     @BindView(R.id.order_viewpager)
     NoScrollViewPager orderViewpager;
     Unbinder unbinder;
+    @BindView(R.id.all_order_name)
+    TextView allOrderName;
+    @BindView(R.id.pending_payment_name)
+    TextView pendingPaymentName;
+    @BindView(R.id.receiving_goods_name)
+    TextView receivingGoodsName;
+    @BindView(R.id.evaluate_name)
+    TextView evaluateName;
+    @BindView(R.id.completed_name)
+    TextView completedName;
+    Unbinder unbinder1;
     private List<Fragment> list;
 
 
@@ -48,7 +58,7 @@ public class OrderFragment extends BaseFragment  {
     @Override
     protected void initView(View view) {
         unbinder = ButterKnife.bind(this, view);
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add(new AllOrderFragment());
         list.add(new PaymentFragment());
         list.add(new ReceivingGoodsFragment());
@@ -77,9 +87,10 @@ public class OrderFragment extends BaseFragment  {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (unbinder!=null) {
+        if (unbinder != null) {
             unbinder.unbind();
         }
+        unbinder1.unbind();
     }
 
     @OnClick({R.id.all_order, R.id.pending_payment, R.id.receiving_goods, R.id.evaluate, R.id.completed})
@@ -87,21 +98,53 @@ public class OrderFragment extends BaseFragment  {
         switch (view.getId()) {
             case R.id.all_order:
                 orderViewpager.setCurrentItem(0);
+                allOrderName.setTextColor(Color.parseColor("#ff0000"));
+                pendingPaymentName.setTextColor(Color.parseColor("#666666"));
+                receivingGoodsName.setTextColor(Color.parseColor("#666666"));
+                evaluateName.setTextColor(Color.parseColor("#666666"));
+                completedName.setTextColor(Color.parseColor("#666666"));
                 break;
             case R.id.pending_payment:
                 orderViewpager.setCurrentItem(1);
+                allOrderName.setTextColor(Color.parseColor("#666666"));
+                pendingPaymentName.setTextColor(Color.parseColor("#ff0000"));
+                receivingGoodsName.setTextColor(Color.parseColor("#666666"));
+                evaluateName.setTextColor(Color.parseColor("#666666"));
+                completedName.setTextColor(Color.parseColor("#666666"));
                 break;
             case R.id.receiving_goods:
                 orderViewpager.setCurrentItem(2);
+                allOrderName.setTextColor(Color.parseColor("#666666"));
+                pendingPaymentName.setTextColor(Color.parseColor("#666666"));
+                receivingGoodsName.setTextColor(Color.parseColor("#ff0000"));
+                evaluateName.setTextColor(Color.parseColor("#666666"));
+                completedName.setTextColor(Color.parseColor("#666666"));
                 break;
             case R.id.evaluate:
                 orderViewpager.setCurrentItem(3);
+                allOrderName.setTextColor(Color.parseColor("#666666"));
+                pendingPaymentName.setTextColor(Color.parseColor("#666666"));
+                receivingGoodsName.setTextColor(Color.parseColor("#666666"));
+                evaluateName.setTextColor(Color.parseColor("#ff0000"));
+                completedName.setTextColor(Color.parseColor("#666666"));
                 break;
             case R.id.completed:
                 orderViewpager.setCurrentItem(4);
+                allOrderName.setTextColor(Color.parseColor("#666666"));
+                pendingPaymentName.setTextColor(Color.parseColor("#666666"));
+                receivingGoodsName.setTextColor(Color.parseColor("#666666"));
+                evaluateName.setTextColor(Color.parseColor("#666666"));
+                completedName.setTextColor(Color.parseColor("#ff0000"));
                 break;
         }
     }
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder1 = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
 }

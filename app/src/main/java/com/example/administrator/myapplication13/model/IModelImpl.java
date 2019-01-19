@@ -88,4 +88,20 @@ public class IModelImpl implements IModel {
         });
     }
 
+    @Override
+    public void postFileMoreRequeryData(String url, Map<String, Object> params, Class clazz, MyCallBack myCallBack) {
+        RetrofitManager.getmRetrofitManager().postFileMore(url, params, new RetrofitManager.HttpListener() {
+            @Override
+            public void onSuccess(String data) {
+                Object o = new Gson().fromJson(data, clazz);
+                myCallBack.setData(o);
+            }
+
+            @Override
+            public void onFail(String error) {
+                myCallBack.setData(error);
+            }
+        });
+    }
+
 }

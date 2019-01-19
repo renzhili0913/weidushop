@@ -63,11 +63,23 @@
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="@dimen/dp_312"
-        android:layout_height="@dimen/dp_70"
-        android:orientation="horizontal"
+        android:layout_height="@dimen/dp_90"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:gravity="center"
         android:layout_below="@id/text_lyayout"
         android:layout_marginTop="@dimen/dp_10">
-        <ImageView
+        <!--展示上传的图片-->
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:columnWidth="60dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp" />
+       <!-- <ImageView
             android:id="@+id/image"
             android:visibility="gone"
             android:layout_width="@dimen/dp_70"
@@ -76,7 +88,7 @@
             android:id="@+id/but_image"
             android:layout_width="@dimen/dp_70"
             android:layout_height="@dimen/dp_70"
-            android:background="@mipmap/common_btn_camera_blue_n"/>
+            android:background="@mipmap/common_btn_camera_blue_n"/>-->
     </LinearLayout>
     <RadioButton
         android:id="@+id/synchronization_circle"
@@ -97,5 +109,5 @@
         android:background="@drawable/add_address_shape"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_100"/>
+        android:layout_marginBottom="@dimen/dp_80"/>
 </RelativeLayout>

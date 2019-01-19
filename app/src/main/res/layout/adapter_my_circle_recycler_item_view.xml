@@ -33,7 +33,7 @@
             android:textColor="#666"
             android:layout_below="@+id/image_hander"
             />
-        <ImageView
+        <com.example.administrator.myapplication13.view.MultiImageView
             android:id="@+id/image"
             android:layout_below="@+id/content"
             android:layout_marginTop="@dimen/dp_10"

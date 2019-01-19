@@ -9,6 +9,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        packagingOptions {
+            exclude 'META-INF/rxjava.properties'
+        }
     }
     buildTypes {
         release {
@@ -30,6 +33,7 @@ android {
             }
         }
     }
+
 }
 
 dependencies {
@@ -79,5 +83,8 @@ dependencies {
 
     //pop
     implementation 'com.example.zhouwei.library:library:1.0.0'
+
+
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 
 }

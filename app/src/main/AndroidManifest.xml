@@ -32,6 +32,7 @@
         <activity android:name=".activity.EstablishOrderActivity"/>
         <activity android:name=".activity.PaymentActivity"/>
         <activity android:name=".activity.EvaluateActivity"/>
+        <activity android:name=".iamgesview.PlusImageActivity"/>
     </application>
 
 </manifest>

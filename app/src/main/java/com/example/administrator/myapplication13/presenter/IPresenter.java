@@ -10,4 +10,5 @@ public interface IPresenter {
     void deleteRequeryData(String url, Class clazz);
     void putRequeryData(String url, Map<String, String> params, Class clazz);
     void postFileRequeryData(String url, Map<String, String> params, Class clazz);
+    void postFileMoreRequeryData(String url, Map<String, Object> params, Class clazz);
 }

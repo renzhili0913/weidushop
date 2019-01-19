@@ -33,7 +33,14 @@ public interface BaseApis<T> {
     Observable<ResponseBody> delete(@Url String url);
     @PUT
     Observable<ResponseBody> put(@Url String url,@QueryMap Map<String, String> map);
+    /**单张上传*/
     @POST
     Observable<ResponseBody> postFile(@Url String url,@Body MultipartBody multipartBody);
+    /** 图文上传*//*
+    @POST
+    @Multipart
+    Observable<RequestBody> upLoadImg(@Part MultipartBody.Part[] parts, @Part("APP_KEY") RequestBody APP_KEY, @Part("APP_TOKEN") RequestBody APP_TOKEN);
+*/
+
 
 }

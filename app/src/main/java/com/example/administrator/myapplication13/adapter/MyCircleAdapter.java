@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.myapplication13.R;
 import com.example.administrator.myapplication13.bean.CircleBean;
 import com.example.administrator.myapplication13.bean.MyCircleBean;
+import com.example.administrator.myapplication13.view.MultiImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.SimpleDateFormat;
@@ -82,7 +83,14 @@ public class MyCircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mViewHolder.createTime.setText(date);
         //设置内容
         mViewHolder.content.setText(list.get(i).getContent());
-        Glide.with(context).load(list.get(i).getImage()).into(mViewHolder.image);
+        //设置图片
+        String[] image = list.get(i).getImage().split("\\,");
+        List<String> sList = new ArrayList<>();
+        for(int a = 0;a<image.length;a++){
+            sList.add(image[a]);
+        }
+        mViewHolder.image.setList(sList);
+       // Glide.with(context).load(list.get(i).getImage()).into(mViewHolder.image);
         mViewHolder.text_num.setText(list.get(i).getGreatNum()+"");
         //判断是否有点赞
           if (list.get(i).getGreatNum()>=1){
@@ -135,7 +143,7 @@ public class MyCircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.content)
         TextView content;
         @BindView(R.id.image)
-        ImageView image;
+        MultiImageView image;
         @BindView(R.id.fabulous)
         ImageView fabulous;
         @BindView(R.id.text_num)

@@ -27,10 +27,11 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@mipmap/quanbudd_ddf"/>
             <TextView
+                android:id="@+id/all_order_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="#666666"
+                android:textColor="#f00"
                 android:text="全部订单"
                 android:layout_marginTop="@dimen/dp_10"/>
         </LinearLayout>
@@ -47,6 +48,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@mipmap/daifuk_ddf"/>
             <TextView
+                android:id="@+id/pending_payment_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -67,6 +69,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@mipmap/daishouh_ddf"/>
             <TextView
+                android:id="@+id/receiving_goods_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -87,6 +90,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@mipmap/daipingj_ddf"/>
             <TextView
+                android:id="@+id/evaluate_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -107,6 +111,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@mipmap/yiwanc_ddf"/>
             <TextView
+                android:id="@+id/completed_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"

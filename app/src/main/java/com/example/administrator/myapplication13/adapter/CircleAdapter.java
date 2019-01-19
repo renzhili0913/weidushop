@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.myapplication13.R;
 import com.example.administrator.myapplication13.bean.CircleBean;
+import com.example.administrator.myapplication13.view.MultiImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.SimpleDateFormat;
@@ -85,7 +86,14 @@ public class CircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         mViewHolder.nickName.setText(list.get(i).getNickName());
         //设置内容
         mViewHolder.content.setText(list.get(i).getContent());
-        Glide.with(context).load(list.get(i).getImage()).into(mViewHolder.image);
+        //设置图片
+        String[] image = list.get(i).getImage().split("\\,");
+        List<String> sList = new ArrayList<>();
+        for(int a = 0;a<image.length;a++){
+            sList.add(image[a]);
+        }
+        mViewHolder.image.setList(sList);
+       // Glide.with(context).load(list.get(i).getImage()).into(mViewHolder.image);
         mViewHolder.text_num.setText(list.get(i).getGreatNum()+"");
       if (list.get(i).getWhetherGreat()==1){
             mViewHolder.fabulous.setBackgroundResource(R.mipmap.common_btn_prise_s);
@@ -137,7 +145,7 @@ public class CircleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @BindView(R.id.content)
         TextView content;
         @BindView(R.id.image)
-        ImageView image;
+        MultiImageView image;
         @BindView(R.id.fabulous)
         ImageView fabulous;
         @BindView(R.id.text_num)
